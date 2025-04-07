@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notice Board</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #e53935;
+      animation: blink 1s step-start 0s infinite;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .notice {
+      background-color: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 6px;
+    }
+
+    .notice strong {
+      display: block;
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+
+    .notice em {
+      color: #666;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <h1>📌 NOTICE BOARD</h1>
+
+  <div class="notice">
+  <strong>📄 New Circular Released</strong>
+  <em>April 9, 2025</em><br>
+  Please read the latest circular <a href="https://example.com/circular.pdf" target="_blank">here</a>.
+</div>
+
+<div class="notice">
+    <strong>📢 Guest Lecture Tomorrow</strong>
+    <em>April 8, 2025</em><br>
+    Don't miss the session on AI by Dr. Sharma at 10 AM in the auditorium.
+  </div>
+
+  <div class="notice">
+    <strong>🎉 Cultural Fest Registration</strong>
+    <em>April 10, 2025</em><br>
+    Register now for inter-department competitions — last date April 12!
+  </div>
+
+</body>
+</html>
+

@@ -1,0 +1,180 @@
+04.20 10:14
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notice Board</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #f4f4f4;
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    h1 {
+      color: #e53935;
+      animation: blink 2s step-start 0s infinite;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .notice-container {
+      height: 150px;
+      overflow: hidden;
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .notices {
+      display: flex;
+      flex-direction: column;
+      transition: transform 1s linear;
+    }
+
+    .notice {
+      display: flex;
+      background-color: #fff3cd;
+      border-left: 5px solid #ffc107;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      height: 150px;
+      overflow: hidden;
+    }
+
+    .serial-number {
+      width: 50px;
+      background-color: #00796b;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+
+    .notice-content {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .notice-content strong {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .notice-content a {
+      color: #e53935;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .notice-content a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1> NOTICE BOARD </h1>
+  </header>
+  <div class="content">
+    <div class="notice-container" id="notice-container">
+      <div class="notices" id="notices">
+        <div class="notice">
+          <div class="serial-number">1</div>
+          <div class="notice-content">
+            <strong>G&SR Correction Slip No : 21 added.....</strong>
+            <a href="https://sites.google.com/view/booksandcirculars4runningstaff/gsr/correction-slips/cs-no-21?authuser=0" target="_blank">Click Here</a>
+          </div>
+        </div>
+        <div class="notice">
+          <div class="serial-number">2</div>
+          <div class="notice-content">
+            <strong>WTT Part B Correction Slip No : 05 added.....</strong>
+            <a href="https://sites.google.com/view/booksandcirculars4runningstaff/wtt-kr/wtt-part-b/correction-slips/cs-no-05?authuser=0" target="_blank">Click Here</a>
+          </div>
+        </div>
+        <div class="notice">
+          <div class="serial-number">3</div>
+          <div class="notice-content">
+            <strong>Usage of New Email System</strong>
+            <a href="https://crewlobbymadgaon.github.io/Email/" target="_blank">Click Here</a>
+          </div>
+        </div>
+        <div class="notice">
+          <div class="serial-number">4</div>
+          <div class="notice-content">
+            <strong>Important: Check new weekly schedule updates.</strong>
+            <a href="#">Click Here</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      const container = document.getElementById("notice-container");
+      const notices = document.getElementById("notices");
+
+      const noticeHeight = 160;
+      const originalNotices = [...notices.children];
+      originalNotices.forEach(n => notices.appendChild(n.cloneNode(true)));
+
+      let index = 0;
+
+      function scrollNotices() {
+        index++;
+        notices.style.transition = 'transform 1s linear';
+        notices.style.transform = `translateY(-${index * noticeHeight}px)`;
+
+        if (index >= originalNotices.length) {
+          setTimeout(() => {
+            notices.style.transition = 'none';
+            notices.style.transform = 'translateY(0)';
+            index = 0;
+          }, 1000);
+        }
+      }
+
+      setTimeout(() => {
+        setInterval(scrollNotices, 4000);
+      }, 1000); // slight delay for Google Sites to fully initialize
+    };
+  </script>
+</body>
+</html>

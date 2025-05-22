@@ -5,15 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Notice Board</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #ece9e6, #ffffff);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -21,16 +17,17 @@
     }
 
     header {
+      width: 100%;
       padding: 20px;
       text-align: center;
-      border-bottom: 2px solid #ddd;
-      width: 100%;
+      background: #fff;
+      border-bottom: 1px solid #ccc;
     }
 
     h1 {
-      margin: 0;
       color: #d32f2f;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
+      margin: 0;
       animation: blink 2s step-start infinite;
     }
 
@@ -38,20 +35,15 @@
       50% { opacity: 0; }
     }
 
-    .notice-container {
-      position: relative;
-      height: 120px;
+    .notice-wrapper {
+      height: 80px;
+      overflow: hidden;
+      margin-top: 30px;
       width: 95%;
       max-width: 600px;
-      overflow: hidden;
-      background: #fff8e1;
-      border-left: 6px solid #ff9800;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      margin-top: 30px;
     }
 
-    .notices {
+    .notice-list {
       display: flex;
       flex-direction: column;
       transition: transform 0.6s ease-in-out;
@@ -60,32 +52,22 @@
     .notice {
       display: flex;
       align-items: center;
-      gap: 15px;
-      padding: 15px 20px;
-      min-height: 120px;
+      padding: 10px 5px;
+      height: 80px;
+      font-size: 1rem;
     }
 
-    .serial-number {
+    .serial {
       width: 40px;
-      height: 40px;
-      background-color: #00796b;
-      color: white;
-      font-size: 1.2rem;
+      text-align: center;
       font-weight: bold;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      color: #00796b;
+      margin-right: 10px;
+      font-size: 1.2rem;
     }
 
     .notice-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .notice-text strong {
-      font-size: 1rem;
-      margin-bottom: 5px;
+      flex: 1;
     }
 
     .notice-text a {
@@ -98,8 +80,8 @@
       text-decoration: underline;
     }
 
-    .notice-container:hover .notices {
-      animation-play-state: paused;
+    .notice-wrapper:hover .notice-list {
+      animation-play-state: paused !important;
     }
   </style>
 </head>
@@ -109,26 +91,26 @@
     <h1>📌 NOTICE BOARD 📌</h1>
   </header>
 
-  <div class="notice-container" id="noticeContainer">
-    <div class="notices" id="notices">
+  <div class="notice-wrapper" id="noticeContainer">
+    <div class="notice-list" id="notices">
       <div class="notice">
-        <div class="serial-number">1</div>
+        <div class="serial">1</div>
         <div class="notice-text">
-          <strong>Advisory Circular Regarding Precaution while movement of BOXN covered with Tarpaulin</strong>
-          <a href="https://github.com/Crewlobbymadgaon/Shed-Order/raw/main/advisory%20circular.pdf" target="_blank">Click Here</a>
+          G&SR Correction Slip No:22 –
+          <a href="https://sites.google.com/view/booksandcirculars4runningstaff/gsr/correction-slips/cs-no-22" target="_blank">Click Here</a>
         </div>
       </div>
       <div class="notice">
-        <div class="serial-number">2</div>
+        <div class="serial">2</div>
         <div class="notice-text">
-          <strong>Safety Circular No : 05/2025</strong>
-          <a href="https://sites.google.com/d/11yEuodAiB-qKM3bKZ9SmaXSxb_gx9vMZ/p/1jSt3bj0IyPMTxeuUApU642YMzoy_wwd4/edit" target="_blank">Click Here</a>
+          WTT Part B Correction Slip No:05 –
+          <a href="https://sites.google.com/view/booksandcirculars4runningstaff/wtt-kr/wtt-part-b/correction-slips/cs-no-05" target="_blank">Click Here</a>
         </div>
       </div>
       <div class="notice">
-        <div class="serial-number">3</div>
+        <div class="serial">3</div>
         <div class="notice-text">
-          <strong>Usage of New Email System</strong>
+          Usage of New Email System –
           <a href="https://crewlobbymadgaon.github.io/Email/" target="_blank">Click Here</a>
         </div>
       </div>
@@ -137,13 +119,13 @@
 
   <script>
     const container = document.getElementById('noticeContainer');
-    const noticesEl = document.getElementById('notices');
-    const notices = noticesEl.children;
+    const noticeList = document.getElementById('notices');
+    const notices = noticeList.children;
     let currentIndex = 0;
 
-    // Duplicate first notice for smooth looping
+    // Clone first notice to end for smooth loop
     const clone = notices[0].cloneNode(true);
-    noticesEl.appendChild(clone);
+    noticeList.appendChild(clone);
 
     const noticeHeight = container.clientHeight;
     let interval = setInterval(scrollNotice, 3000);
@@ -153,18 +135,16 @@
 
     function scrollNotice() {
       currentIndex++;
-      noticesEl.style.transform = `translateY(-${noticeHeight * currentIndex}px)`;
+      noticeList.style.transform = `translateY(-${noticeHeight * currentIndex}px)`;
 
-      // Reset scroll when reaching the cloned last notice
-      if (currentIndex === notices.length - 1) {
+      if (currentIndex === notices.length) {
         setTimeout(() => {
-          noticesEl.style.transition = "none";
-          noticesEl.style.transform = "translateY(0)";
+          noticeList.style.transition = "none";
+          noticeList.style.transform = "translateY(0)";
           currentIndex = 0;
-          // Re-enable transition
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-              noticesEl.style.transition = "transform 0.6s ease-in-out";
+              noticeList.style.transition = "transform 0.6s ease-in-out";
             });
           });
         }, 600);

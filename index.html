@@ -45,19 +45,22 @@
 
     .notice {
       display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      padding: 10px;
+      align-items: center;
+      padding: 12px 10px;
       box-sizing: border-box;
       width: 100%;
     }
 
     .serial {
-      width: 30px;
       font-weight: bold;
       font-size: 1.2rem;
       color: #00796b;
+      margin-right: 12px;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
     }
 
     .text {
@@ -85,12 +88,13 @@
 
     @media (max-width: 480px) {
       .notice {
-        flex-direction: column;
+        flex-direction: row;
         align-items: flex-start;
       }
 
       .serial {
         font-size: 1rem;
+        width: 26px;
       }
 
       .text {
@@ -107,7 +111,7 @@
 
   <div class="notice-wrapper" id="noticeWrapper">
     <div class="notice-list" id="noticeList">
-      <div class="notice"><div class="serial">1</div><div class="text"><strong>Advisory Circular Regarding Precaution while movement of BOXN covered with Tarpaulin</strong><a href="https://github.com/Crewlobbymadgaon/Shed-Order/raw/main/advisory%20circular.pdf" target="_blank">Click Here</a></div></div>
+      <div class="notice"><div class="serial">1</div><div class="text"><strong>Advisory Circular Regarding Precaution while movement of BOXN covered with Tarpaulin</strong><a href="https://github.com/Crewlobbymadgaon/Shed-Order/blob/f289061f2b9f6b6385ad01bcc21703214c352e82/advisory%20circular.pdf" target="_blank">Click Here</a></div></div>
       <div class="notice"><div class="serial">2</div><div class="text"><strong>WTT Part B Correction Slip No:05</strong><a href="https://sites.google.com/view/booksandcirculars4runningstaff/wtt-kr/wtt-part-b/correction-slips/cs-no-05" target="_blank">Click Here</a></div></div>
       <div class="notice"><div class="serial">3</div><div class="text"><strong>Usage of New Email System for Communication. Please refer to the detailed documentation available on the portal.</strong><a href="https://crewlobbymadgaon.github.io/Email/" target="_blank">Click Here</a></div></div>
     </div>
@@ -120,7 +124,7 @@
 
     let index = 0;
 
-    // Clone first notice for loop
+    // Clone first notice for looping
     const firstClone = notices[0].cloneNode(true);
     list.appendChild(firstClone);
 
